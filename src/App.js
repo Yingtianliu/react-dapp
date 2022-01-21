@@ -17,9 +17,15 @@ function App() {
 
   //call the smart contract, read the current greeting value
   async function fetchGreeting() {
-    if (typeof window.ethererum !== "undefined") {
+    // console.log("Fetching greeting");
+    // const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    // await provider.send("eth_requestAccounts", []);
+    // const signer = provider.getSigner();
+    // console.log("Account:", await signer.getAddress());
+    if (typeof window.ethererum !== undefined) {
       // 需要 Metamask Extension to be Connected, 然后继续
       const provider = new ethers.providers.Web3Provider(window.ethereum)
+      // console.log(Greeter)
       const contract = new ethers.Contract(greeterAddress, Greeter.abi, provider)
       try {
         const data = await contract.greet()
@@ -34,7 +40,7 @@ function App() {
   async function setGreeting() {
     //确认用户type in了greeting
     if (!greeting) return
-    if (typeof window.ethereum !== "undefined") {
+    if (typeof window.ethereum !== undefined) {
       //等待用户 enable accout to be used
       await requestAccount()
       // Another provider.    Provider & Signer
